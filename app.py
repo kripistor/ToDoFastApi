@@ -9,9 +9,6 @@ from todo.database.models import Task
 
 app = FastAPI()
 
-engine = create_async_engine(config.postgres_dsn, future=True)
-db_pool = async_sessionmaker(bind=engine, expire_on_commit=False, class_=AsyncSession)
-db = db_pool()
 app.mount('/static', StaticFiles(directory='todo/static/'), name='static')
 templates = Jinja2Templates(directory='todo/template')
 
