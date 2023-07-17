@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To Do List</title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>To Do List</h1>
+
+        <form action="/add_task" method="POST">
+            <input type="text" name="title" placeholder="Enter task title" required>
+            <button type="submit">Add Task</button>
+        </form>
+
+        <ul>
+            {% for task in task_list %}
+            <li {% if task.completed %}class="completed"{% endif %}>
+                <span>{{ task.title }}</span>
+                <div class="actions">
+                    {% if not task.completed %}
+                    <a href="/update_task_complete/{{ task.id }}">Complete</a>
+                    {% else %}
+                    <a href="/update_task_uncomplete/{{ task.id }}">Mark as Incomplete</a>
+                    {% endif %}
+                    <a href="/delete_task/{{ task.id }}">Delete</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
